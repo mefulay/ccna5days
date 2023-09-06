@@ -41,19 +41,21 @@ int e1/0
 p1:
 config t
 int e0/0
- ip add dhcp
+ no ip add dhcp
+ ip add 10.2.1.101 255.255.255.0
  no shut
 p2:
 config t
 int e1/0
- ip add dhcp
+ no ip add dhcp
+ ip add 10.2.1.201 255.255.255.0
  no shut
 
 Pano mag static Route sa PC:
 cmd
 route  add 10.m.0.0 mask 255.255.0.0 10.m.1.4 -p
 
-How to StaticRoute Cisco/PC/EndDevices:
+How to DefaultRoute Cisco/PC/EndDevices:
 p1:
 config T
 ip route 0.0.0.0  0.0.0.0 10.2.1.1
@@ -183,10 +185,10 @@ router bgp 1
  neighbor 208.8.8.4 remote-as 45
  neighbor 207.7.7.2 remote-as 2
  neighbor 209.9.9.3 remote-as 3
- network 10.0.0.0 Mask 255.255.255.252
- network 207.7.7.0
- network 208.8.8.0
- network 209.9.9.0
+ network 10.1.1.0 Mask 255.255.255.252
+ network 207.7.7.0 Mask 255.255.255.0
+ network 208.8.8.0 Mask 255.255.255.0
+ network 209.9.9.0 Mask 255.255.255.0
 end
 @@@ISP1:
 CONFIG T
@@ -199,7 +201,7 @@ network 208.8.8.0
 network 24.2.4.0 mask 255.255.255.0
 network 44.44.44.44 mask 255.255.255.255
 network 45.4.5.0 mask 255.255.255.0
-!PretentInternet
+!PretendInternet
 network 0.0.0.0
 ip route 0.0.0.0 0.0.0.0 null 0
 ip route 10.0.0.0 255.0.0.0 208.8.8.1
@@ -239,7 +241,7 @@ ip route 0.0.0.0 0.0.0.0 null 0
 ip route 10.0.0.0 255.0.0.0 209.9.9.1
 end
 
-Isp4:
+Isp4:pag google yan
 config t
 int lo 8
  ip add 8.8.8.8 255.255.255.255
